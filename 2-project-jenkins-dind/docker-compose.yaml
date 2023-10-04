@@ -1,0 +1,31 @@
+version: '3.2'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    user: root
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./jenkins:/var/jenkins_home:rw
+      - /run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./war:/mnt/:rw
+    ports:
+      - 8080:8080
+    container_name: jenkins
+
+  artifactory:
+    image: mzain/artifactory-oss:5.4.4
+    ports:
+      - "9090:8081"
+    container_name: artifactory
+    volumes:
+      - ./artifactory:/var/opt/jfrog/artifactory:rw
+
+  tomcat:
+    image: mzain/tomcat
+    ports:
+      - 7777:8080
+    container_name: tomcat
+    volumes:
+      - ./war/:/usr/local/tomcat/webapps:rw
