@@ -14,5 +14,7 @@
      - Tomcat : Application Server For Java Projects 
      - Dockerhub : like github for code but for containers  
 
+## You can see this 2 Projects in the Below Video. 
 
-### Youtube vidoes : https://www.youtube.com/watch?v=QdABGNrDD1o&t=12s
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/QdABGNrDD1o/0.jpg)](http://www.youtube.com/watch?v=YQdABGNrDD1o "2 Projects using Docker | Jenkins | Artifactory | Tomcat | DIND ")
+
