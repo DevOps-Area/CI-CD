@@ -1,0 +1,35 @@
+version: '3.2'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    user: root
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./jenkins:/var/jenkins_home:rw
+      - /run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./war:/mnt/:rw
+    ports:
+      - 8080:8080
+    container_name: jenkins
+
+  nexus:
+    image: sonatype/nexus3:latest
+    container_name: nexus
+    ports:
+      - "9090:8081"
+    volumes:
+      - ./nexus-data:/nexus-data
+    environment:
+      - NEXUS_SECURITY_RANDOMPASSWORD=false
+      - NEXUS_SECURITY_ADMINPASSWORD=admin123
+    restart: unless-stopped
+
+  tomcat:
+    image: mzain/tomcat
+    ports:
+      - 7777:8080
+    container_name: tomcat
+    volumes:
+      - ./war/:/usr/local/tomcat/webapps:rw
